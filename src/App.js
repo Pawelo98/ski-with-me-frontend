@@ -5,12 +5,14 @@ import "./App.css";
 
 import AuthService from "./services/auth.service";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
+import Login from "./components/logging/login.component";
+import Register from "./components/logging/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
+import SearchResorts from "./components/searchResorts/search-resorts.component";
+import {Colors} from "./constants";
 
 class App extends Component {
   constructor(props) {
@@ -43,8 +45,8 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <div style={{backgroundColor: Colors.background}}>
+          <nav className="navbar navbar-expand navbar-dark" style={{backgroundColor: Colors.primary}}>
             <Link to={"/"} className="navbar-brand">
               SkiWithMe
             </Link>
@@ -52,6 +54,12 @@ class App extends Component {
               <li className="nav-item">
                 <Link to={"/home"} className="nav-link">
                   Home
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/resorts"} className="nav-link">
+                  Szukaj ośrodka
                 </Link>
               </li>
 
@@ -81,7 +89,7 @@ class App extends Component {
                 </li>
                 <li className="nav-item">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
-                    LogOut
+                    Wyloguj się
                   </a>
                 </li>
               </div>
@@ -89,20 +97,20 @@ class App extends Component {
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
-                    Login
+                    Zaloguj się
                   </Link>
                 </li>
 
                 <li className="nav-item">
                   <Link to={"/register"} className="nav-link">
-                    Sign Up
+                    Zarejestruj się
                   </Link>
                 </li>
               </div>
             )}
           </nav>
 
-          <div className="container mt-3">
+          <div className="container mt-3" style={{backgroundColor: Colors.background}}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
@@ -110,6 +118,7 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route path="/user" component={BoardUser} />
               <Route path="/admin" component={BoardAdmin} />
+              <Route path="/resorts" component={SearchResorts} />
             </Switch>
           </div>
         </div>
