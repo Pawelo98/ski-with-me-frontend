@@ -4,14 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
-
 import Login from "./components/logging/login.component";
 import Register from "./components/logging/register.component";
 import Home from "./components/home.component";
-import Profile from "./components/profile.component";
+import Profile from "./components/userProfile/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
 import SearchResorts from "./components/searchResorts/search-resorts.component";
+import ResortView from "./components/resortView/resort-view";
+import PasswordChange from "./components/userProfile/password.change.component";
+import UserDataChange from "./components/userProfile/user.data.change.component";
 import {Colors} from "./constants";
 
 class App extends Component {
@@ -116,9 +118,12 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/passwordChange/:username" component={PasswordChange} />
+              <Route exact path="/userDataChange/:username" component={UserDataChange} />
               <Route path="/user" component={BoardUser} />
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/resorts" component={SearchResorts} />
+              <Route path="/resortView/:resortId" component={ResortView} />
             </Switch>
           </div>
         </div>

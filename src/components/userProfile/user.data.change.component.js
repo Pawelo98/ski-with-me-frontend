@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import AuthService from "../../services/auth.service";
+import UserService from "../../services/user.service";
 import { validation } from "../../common/validation-rules";
 import { Input, Form, Checkbox } from "antd";
 import { Grid, Segment, Button, Container } from "semantic-ui-react";
 import { Colors } from "../../constants";
 import { notification } from "antd";
 import { FaSkiing, FaSnowboarding } from 'react-icons/fa';
-import { IoIosPersonAdd } from 'react-icons/io';
+import { IoIosPerson } from 'react-icons/io';
 import TextArea from "antd/lib/input/TextArea";
 const FormItem = Form.Item;
 
-export default class Register extends Component {
+export default class UserDataChange extends Component {
   constructor(props) {
     super(props);
-    this.handleRegister = this.handleRegister.bind(this);
+    this.handleDataChange = this.handleDataChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleSkiing = this.toggleSkiing.bind(this);
     this.toggleSnowboarding = this.toggleSnowboarding.bind(this);
@@ -24,10 +24,6 @@ export default class Register extends Component {
         validateStatus: ""
       },
       email: {
-        value: '',
-        validateStatus: ""
-      },
-      password: {
         value: '',
         validateStatus: ""
       },
@@ -48,10 +44,53 @@ export default class Register extends Component {
         validateStatus: ""
       },
       skiing: false,
-      snowboarding: false,
-      successful: false
+      snowboarding: false
     };
   }
+
+  componentDidMount() {
+    var usernameObj = {
+        value: this.props.location.state.userData.username,
+        validateStatus: ""
+    }
+
+    var emailObj = {
+        value: this.props.location.state.userData.email,
+        validateStatus: ""
+    }
+
+    var nameObj = {
+        value: this.props.location.state.userData.name,
+        validateStatus: ""
+    }
+
+    var surnameObj = {
+        value: this.props.location.state.userData.surname,
+        validateStatus: ""
+    }
+
+    var phoneNumberObj = {
+        value: this.props.location.state.userData.phoneNumber,
+        validateStatus: ""
+    }
+
+    var descriptionObj = {
+        value: this.props.location.state.userData.description,
+        validateStatus: ""
+    }
+
+    this.setState(() => ({
+        username: usernameObj,
+        email: emailObj,
+        name: nameObj,
+        surname: surnameObj,
+        phoneNumber: phoneNumberObj,
+        description: descriptionObj,
+        skiing: this.props.location.state.userData.skier,
+        snowboarding: this.props.location.state.userData.snowboarder
+      })
+    );
+}
 
   onChange(event, validationFunction) {
     const target = event.target;
@@ -83,7 +122,7 @@ export default class Register extends Component {
   }
 
   isFormInvalid() {
-    if(this.state.password.validateStatus === "error" || this.state.username.validateStatus === "error" || this.state.email.validateStatus === "error" || this.state.name.validateStatus === "error"
+    if(this.state.username.validateStatus === "error" || this.state.email.validateStatus === "error" || this.state.name.validateStatus === "error"
     || this.state.surname.validateStatus === "error" || this.state.phoneNumber.validateStatus === "error" || this.state.description.validateStatus === "error") {
         return true;
     }
@@ -91,39 +130,41 @@ export default class Register extends Component {
     return false;
   }
 
-  handleRegister(e) {
+  handleDataChange(e) {
     e.preventDefault();
 
-    this.setState({
-      successful: false
-    });
+    var userDataRequest= {
+        username: this.state.username.value,
+        email: this.state.email.value,
+        name: this.state.name.value,
+        surname: this.state.surname.value,
+        phoneNumber: this.state.phoneNumber.value,
+        description: this.state.description.value,
+        skiing: this.state.skiing,
+        snowboarding: this.state.snowboarding
+    }
+
+    console.log(userDataRequest);
     
-    AuthService.register(
-      this.state.username.value,
-      this.state.email.value,
-      this.state.password.value,
-      this.state.name.value,
-      this.state.surname.value,
-      this.state.phoneNumber.value,
-      this.state.description.value,
-      this.state.skiing,
-      this.state.snowboarding
+    UserService.updateUserData(
+      userDataRequest,
+      this.state.username.value
     )
     .then(
       () => {
         notification.success({
-          message: "Zarejestrowano!",
+          message: "Zmieniono dane!",
           description:
-              "Udana próba rejestracji, spróbuj się teraz zalogować!",
+              "Udana zmiana danych użytkownika!",
         });
 
-        this.props.history.push("/login");
+        this.props.history.push(`../profile`);
     })
     .catch((error) => {
       notification.error({
-          message: "Rejestracja nieudana!",
+          message: "Zmiana danych nieudana!",
           description:
-              "Nieudana próba rejestracji!",
+              "Nieudana zmiana danych użytkownika!",
       });
     });
   }
@@ -136,7 +177,7 @@ export default class Register extends Component {
               <Container>
                   <Form onSubmit={this.onSubmit} autoComplete="off">
                       <Grid.Column>
-                          <h4 title="Rejestracja" style={{ fontWeight: "bold", textAlign: "center", paddingBottom: 20 }}><IoIosPersonAdd size="100px" tooltip="Rejestracja"/></h4>
+                          <h4 title="Zmiana danych" style={{ fontWeight: "bold", textAlign: "center", paddingBottom: 20 }}><IoIosPerson size="100px" tooltip="Zmiana danych"/></h4>
                       </Grid.Column>
                       <FormItem
                           hasFeedback
@@ -145,6 +186,7 @@ export default class Register extends Component {
                           help={this.state.username.errorMsg}>
                           <Input
                               autoComplete="off"
+                              disabled
                               name="username"
                               value={this.state.username.value}
                               placeholder="Nazwa użytkownika"
@@ -152,24 +194,6 @@ export default class Register extends Component {
                                   this.onChange(
                                       username,
                                       validation.validateUsername
-                                  );
-                              }}/>
-                      </FormItem>
-                      <FormItem
-                          hasFeedback
-                          autoComplete="off"
-                          validateStatus={this.state.password.validateStatus}
-                          help={this.state.password.errorMsg}>
-                          <Input
-                              autoComplete="off"
-                              name="password"
-                              type="password"
-                              value={this.state.password.value}
-                              placeholder="Hasło"
-                              onChange={(password) => {
-                                  this.onChange(
-                                      password,
-                                      validation.validatePassword
                                   );
                               }}/>
                       </FormItem>
@@ -271,9 +295,9 @@ export default class Register extends Component {
                           <Button
                               disabled={this.isFormInvalid()}
                               size="small"
-                              onClick={this.handleRegister}
+                              onClick={this.handleDataChange}
                               style={{ backgroundColor: Colors.primary, color: Colors.background }}>
-                              Zarejestruj się
+                              Zmień dane
                           </Button>
                       </FormItem>
                   </Form>
