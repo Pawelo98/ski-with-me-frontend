@@ -6,7 +6,7 @@ import {
   GridRow,
   Button,
 } from "semantic-ui-react";
-import {Colors} from "../../constants";
+import { Colors } from "../../constants";
 import { TiLightbulb } from "react-icons/ti";
 import { FaLightbulb } from "react-icons/fa";
 
