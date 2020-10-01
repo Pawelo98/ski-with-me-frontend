@@ -1,152 +1,141 @@
 import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-
 import AuthService from "../../services/auth.service";
-
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+import { validation } from "../../common/validation-rules";
+import { Input, Form } from "antd";
+import { Grid, Segment, Button, Container } from "semantic-ui-react";
+import { Colors } from "../../constants";
+import { notification } from "antd";
+import { IoIosPerson } from 'react-icons/io';
+const FormItem = Form.Item;
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
+      username: {
+        value: '',
+        validateStatus: ""
+      },
+      password: {
+        value: '',
+        validateStatus: ""
+      },
+      loading: false
     };
   }
 
-  onChangeUsername(e) {
+  onChange(event, validationFunction) {
+    const target = event.target;
+    const inputValue = target.value;
+    const inputName = target.name;
+
     this.setState({
-      username: e.target.value
-    });
+        [inputName]: {
+            value: inputValue,
+            ...validationFunction(inputValue),
+        },
+    })
   }
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
+  isFormInvalid() {
+    if(this.state.password.value === "" || this.state.username.value === "") {
+        return true;
+    }
+    return false;
   }
 
   handleLogin(e) {
     e.preventDefault();
 
     this.setState({
-      message: "",
       loading: true
     });
 
-    this.form.validateAll();
+    AuthService.login(this.state.username.value, this.state.password.value)
+    .then(
+      () => {
+        notification.success({
+          message: "Zalogowano!",
+          description:
+              "Udana próba logowania!",
+        });
 
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push("/profile");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false
+        this.props.history.push("/profile");
+        window.location.reload();
+    })
+    .catch((error) => {
+      notification.error({
+          message: "Logowanie nieudane!",
+          description:
+              "Nieudana próba logowania!",
       });
-    }
+    });
   }
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
-
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-        </div>
-      </div>
+      <Grid textAlign="center">
+        <Grid.Column mobile={12} tablet={9} computer={6}>
+          <Segment padded>
+              <Container>
+                  <Form onSubmit={this.onSubmit} autoComplete="off">
+                      <Grid.Column>
+                          {/* <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                            alt="start-img" style={{ textAlign: "center", padding: 20, paddingBottom: 30 }}/> */}
+                          <h4 title="Logowanie" style={{ fontWeight: "bold", textAlign: "center", paddingBottom: 20 }}><IoIosPerson size="100px" tooltip="Logowanie"/></h4>
+                      </Grid.Column>
+                      <FormItem
+                          hasFeedback
+                          autoComplete="off"
+                          validateStatus={this.state.username.validateStatus}
+                          help={this.state.username.errorMsg}>
+                          <Input
+                              autoComplete="off"
+                              name="username"
+                              value={this.state.username.value}
+                              placeholder="Nazwa użytkownika"
+                              onChange={(username) => {
+                                  this.onChange(
+                                      username,
+                                      validation.validateNotBlank
+                                  );
+                              }}/>
+                      </FormItem>
+                      <FormItem
+                          hasFeedback
+                          autoComplete="off"
+                          validateStatus={this.state.password.validateStatus}
+                          help={this.state.password.errorMsg}>
+                          <Input
+                              autoComplete="off"
+                              name="password"
+                              type="password"
+                              value={this.state.password.value}
+                              placeholder="Hasło"
+                              onChange={(password) => {
+                                  this.onChange(
+                                      password,
+                                      validation.validateNotBlank
+                                  );
+                              }}/>
+                      </FormItem>
+                      <FormItem style={{ marginBottom: 6 }}>
+                          <Button
+                              disabled={this.isFormInvalid()}
+                              size="small"
+                              onClick={this.handleLogin}
+                              style={{ backgroundColor: Colors.primary, color: Colors.background }}>
+                              Zaloguj
+                          </Button>
+                      </FormItem>
+                  </Form>
+              </Container>
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
