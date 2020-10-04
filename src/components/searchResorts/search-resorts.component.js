@@ -151,7 +151,7 @@ export default class SearchResorts extends Component {
       render() {
         return (
             <Grid textAlign="center">
-            <Grid.Column mobile={16} tablet={14} computer={12}>
+            <Grid.Column mobile={16} tablet={16} computer={14}>
               <Segment padded>
                 <FilterBar
                   isLoading={this.state.isLoading}

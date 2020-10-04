@@ -193,7 +193,7 @@ class ResortView extends Component {
     } else {
         return (
         <Grid columns="equal">
-            <Grid.Column mobile={16} tablet={14} computer={12}>
+            <Grid.Column mobile={16} tablet={16} computer={14}>
             <Segment padded>
             <Grid columns="equal">
                 <GridRow columns={1} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>

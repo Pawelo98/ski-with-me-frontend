@@ -75,7 +75,7 @@ export default class Profile extends Component {
     } else {
       return (
         <Grid textAlign="center">
-        <Grid.Column mobile={16} tablet={14} computer={12}>
+        <Grid.Column mobile={16} tablet={16} computer={14}>
           <Segment padded>
             <UserInfo
               currentUser={this.state.currentUser}
