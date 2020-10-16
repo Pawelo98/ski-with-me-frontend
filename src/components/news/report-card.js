@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
   Grid,
   GridColumn,
   GridRow
 } from "semantic-ui-react";
 import { Colors } from "../../constants";
-import { TiLightbulb } from "react-icons/ti";
-import { FaLightbulb } from "react-icons/fa";
 
 class ReportCard extends Component {
   constructor(props) {

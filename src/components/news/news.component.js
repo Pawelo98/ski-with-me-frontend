@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 import NewsService from "../../services/news.service";
-import { Grid, Segment, GridRow, GridColumn, Button } from "semantic-ui-react";
+import { Grid, Segment, GridRow, GridColumn } from "semantic-ui-react";
 import LoadingIndicator from "../../common/LoadingIndicator";
 import { Colors } from "../../constants";
 import TripCard from "./trip-card";
 import ReportCard from "./report-card";
 import { Link } from "react-router-dom";
-import { GiAchievement, GiPerson, GiMountaintop } from 'react-icons/gi';
 
 export default class News extends Component {
   constructor(props) {
@@ -25,23 +24,19 @@ export default class News extends Component {
   componentDidMount() {
     this.getUpcomingTrips(AuthService.getCurrentUser().username).then(upcomingTrips => { this.setState({
         upcomingTrips: upcomingTrips.data.content
-    })
-    console.log(upcomingTrips)});
+    })});
     
     this.getPastTrips(AuthService.getCurrentUser().username).then(pastTrips => { this.setState({
         pastTrips: pastTrips.data.content
-    })
-    console.log(pastTrips)});
+    })});
 
     this.getUpcomingAcquaintancesTrips(AuthService.getCurrentUser().username).then(upcomingAcquaintancesTrips => { this.setState({
         upcomingAcquaintancesTrips: upcomingAcquaintancesTrips.data.content
-    })
-    console.log(upcomingAcquaintancesTrips)});
+    })});
 
     this.getAcquaintancesTripsReports(AuthService.getCurrentUser().username).then(acquaintancesTripsReports => { this.setState({
         acquaintancesTripsReports: acquaintancesTripsReports.data.content
-    })
-    console.log(acquaintancesTripsReports)});
+    })});
   }
 
   getUpcomingTrips(username) {
@@ -90,14 +85,14 @@ export default class News extends Component {
                 <GridRow columns={1} stretched style={{padding: 5, paddingLeft: 50}}>
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         <Link to={{ pathname: `/tripView/${this.state.pastTrips[0].tripId}`, state: { trip: this.state.pastTrips[0] } }}>
-                            <Segment key={this.state.pastTrips[0].tripId}>
+                            <Segment key={this.state.pastTrips[0].tripId} color="red" inverted tertiary>
                                 <TripCard trip={this.state.pastTrips[0]}/>
                             </Segment>
                         </Link>
                     </GridColumn>
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         <Link to={{ pathname: `/tripView/${this.state.pastTrips[1].tripId}`, state: { trip: this.state.pastTrips[1] } }}>
-                            <Segment key={this.state.pastTrips[1].tripId}>
+                            <Segment key={this.state.pastTrips[1].tripId} color="red" inverted tertiary>
                                 <TripCard trip={this.state.pastTrips[1]}/>
                             </Segment>
                         </Link>
@@ -105,7 +100,7 @@ export default class News extends Component {
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         {this.state.pastTrips[2] !== undefined && (
                             <Link to={{ pathname: `/tripView/${this.state.pastTrips[2].tripId}`, state: { trip: this.state.pastTrips[2] } }}>
-                                <Segment key={this.state.pastTrips[2].tripId}>
+                                <Segment key={this.state.pastTrips[2].tripId} color="red" inverted tertiary>
                                     <TripCard trip={this.state.pastTrips[2]}/>
                                 </Segment>
                             </Link>
@@ -115,21 +110,21 @@ export default class News extends Component {
                 <GridRow columns={1} stretched style={{padding: 5, paddingLeft: 50}}>
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[0].tripId}`, state: { trip: this.state.upcomingTrips[0] } }}>
-                            <Segment key={this.state.upcomingTrips[0].tripId}>
+                            <Segment key={this.state.upcomingTrips[0].tripId} color="green" inverted tertiary>
                                 <TripCard trip={this.state.upcomingTrips[0]}/>
                             </Segment>
                         </Link>
                     </GridColumn>
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[1].tripId}`, state: { trip: this.state.upcomingTrips[1] } }}>
-                            <Segment key={this.state.upcomingTrips[1].tripId}>
+                            <Segment key={this.state.upcomingTrips[1].tripId} color="green" inverted tertiary>
                                 <TripCard trip={this.state.upcomingTrips[1]}/>
                             </Segment>
                         </Link>
                     </GridColumn>
                     <GridColumn floated="left" textAlign="center" style={{padding: 3}}>
                         <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[2].tripId}`, state: { trip: this.state.upcomingTrips[2] } }}>
-                            <Segment key={this.state.upcomingTrips[2].tripId}>
+                            <Segment key={this.state.upcomingTrips[2].tripId} color="green" inverted tertiary>
                                 <TripCard trip={this.state.upcomingTrips[2]}/>
                             </Segment>
                         </Link>
@@ -153,8 +148,8 @@ export default class News extends Component {
                     <React.Fragment>
                         {this.state.acquaintancesTripsReports
                         .map((report) => (
-                            <Link to={{ pathname: `/tripView/${report.tripId}`, state: { trip: report } }}>
-                                <Segment key={report.tripId}>
+                            <Link key={report.tripId} to={{ pathname: `/tripView/${report.tripId}`, state: { trip: report } }}>
+                                <Segment color="yellow" inverted tertiary>
                                     <ReportCard report={report}/>
                                 </Segment>
                             </Link>
@@ -165,8 +160,8 @@ export default class News extends Component {
                     <React.Fragment>
                         {this.state.upcomingAcquaintancesTrips
                         .map((trip) => (
-                            <Link to={{ pathname: `/tripView/${trip.tripId}`, state: { trip: trip } }}>
-                                <Segment key={trip.tripId}>
+                            <Link key={trip.tripId} to={{ pathname: `/tripView/${trip.tripId}`, state: { trip: trip } }}>
+                                <Segment color="green" inverted tertiary>
                                     <TripCard trip={trip}/>
                                 </Segment>
                             </Link>

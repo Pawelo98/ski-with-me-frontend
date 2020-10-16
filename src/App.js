@@ -14,6 +14,7 @@ import ResortView from "./components/resortView/resort-view";
 import PasswordChange from "./components/userProfile/password.change.component";
 import UserDataChange from "./components/userProfile/user.data.change.component";
 import News from "./components/news/news.component";
+import Acquaintances from "./components/acquaintances/acquaintances.component";
 import {Colors} from "./constants";
 
 class App extends Component {
@@ -53,11 +54,13 @@ class App extends Component {
               SkiWithMe
             </Link>
             <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to={"/news"} className="nav-link">
-                  Aktualności
-                </Link>
-              </li>
+              {currentUser && (
+                <li className="nav-item">
+                  <Link to={"/news"} className="nav-link">
+                    Aktualności
+                  </Link>
+                </li>
+              )}
 
               <li className="nav-item">
                 <Link to={"/resorts"} className="nav-link">
@@ -75,8 +78,8 @@ class App extends Component {
 
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
+                  <Link to={"/acquaintances/" + this.state.currentUser.username} className="nav-link">
+                    Znajomi
                   </Link>
                 </li>
               )}
@@ -120,6 +123,7 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/passwordChange/:username" component={PasswordChange} />
               <Route exact path="/userDataChange/:username" component={UserDataChange} />
+              <Route exact path="/acquaintances/:username" component={Acquaintances} />
               <Route path="/user" component={BoardUser} />
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/resorts" component={SearchResorts} />

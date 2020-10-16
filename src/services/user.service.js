@@ -25,6 +25,10 @@ class UserService {
     return axios.get(USER_URL + 'acquaintances/' + username, { headers: authHeader() });
   }
 
+  getAcquaintancesToAddFromUsername(username, usernameInput) {
+    return axios.get(USER_URL + 'acquaintancesToAdd?username=' + username + "&usernameInput=" + usernameInput, { headers: authHeader() });
+  }
+
   getTripsFromUsername(username) {
     return axios.get(USER_URL + 'trips/' + username, { headers: authHeader() });
   }
