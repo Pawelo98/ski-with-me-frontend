@@ -5,7 +5,6 @@ import {
   GridColumn,
   GridRow
 } from "semantic-ui-react";
-import { Colors } from "../../constants";
 
 class ReportCard extends Component {
   constructor(props) {
@@ -20,27 +19,27 @@ class ReportCard extends Component {
 
   componentDidMount () {
     this.setState({
-        resortName: this.props.report.resortName,
-        daysNumber: this.props.report.daysNumber,
-        name: this.props.report.name,
-        userTripDescription: this.props.report.userTripDescription
+      resortName: this.props.report.resortName,
+      daysNumber: this.props.report.daysNumber,
+      name: this.props.report.name,
+      userTripDescription: this.props.report.userTripDescription
     });
   }
 
   render () {
     return (
-        <Grid columns="equal">
-            <GridRow columns={1} stretched style={{padding: 5}}>
-                <GridRow columns={1} stretched style={{padding: 5, paddingLeft: 35}}>
-                    <GridColumn textAlign="center" style={{padding: 3}}>
-    <h4 style={{ fontWeight: "bold" }}>{this.state.name} brał(a) udział w {this.state.daysNumber} dniowym wyjeździe w ośrodku {this.state.resortName}</h4>
-                    </GridColumn>
-                    <GridColumn verticalAlign="middle" style={{padding: 3}}>
-                        <h5 style={{ fontWeight: "bold" }}>"{this.state.userTripDescription}"</h5>
-                    </GridColumn>
-                </GridRow>
-            </GridRow>
-        </Grid>
+      <Grid columns="equal">
+        <GridRow columns={1} stretched style={{ padding: 5 }}>
+          <GridRow columns={1} stretched style={{ padding: 5, paddingLeft: 35 }}>
+            <GridColumn textAlign="center" style={{ padding: 3 }}>
+              <h4 style={{ fontWeight: "bold" }}>{this.state.name} brał(a) udział w {this.state.daysNumber} dniowym wyjeździe w ośrodku {this.state.resortName}</h4>
+            </GridColumn>
+            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+              <h5 style={{ fontWeight: "bold" }}>"{this.state.userTripDescription}"</h5>
+            </GridColumn>
+          </GridRow>
+        </GridRow>
+      </Grid>
     );
   }
 }

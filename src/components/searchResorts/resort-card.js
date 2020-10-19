@@ -72,32 +72,32 @@ class ResortCard extends Component {
   render () {
     return (
       <Grid columns="equal">
-        <GridRow columns={10} stretched style={{padding: 5}}>
-          <GridRow columns={10} stretched style={{padding: 5, paddingLeft: 35}}>
-            <GridColumn textAlign="center" style={{padding: 3}}>
+        <GridRow columns={10} stretched style={{ padding: 5 }}>
+          <GridRow columns={10} stretched style={{ padding: 5, paddingLeft: 35 }}>
+            <GridColumn textAlign="center" style={{ padding: 3 }}>
               <h2 style={{ fontWeight: "bold" }}>{this.state.resortName}</h2>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{padding: 3}}>
+            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Otwartych tras: {this.state.runCount}</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{padding: 3}}>
+            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Temperatura (odczuwalna): {this.state.temperature}℃ ({this.state.sensedTemperature}℃)</h5>
             </GridColumn>
           </GridRow>
-          <GridRow columns={10} stretched style={{padding: 5, paddingLeft: 45}}>
-            <GridColumn textAlign="center" style={{padding: 3}}>
+          <GridRow columns={10} stretched style={{ padding: 5, paddingLeft: 45 }}>
+            <GridColumn textAlign="center" style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Odległość do przebycia: {this.state.distance}km</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{padding: 3}}>
+            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Grubość pokrywy śnieżnej: {this.state.snowThickness}cm</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{padding: 3}}>
-            {this.state.nightSkiing === true &&
-              <h5 title="Nocne jazdy możliwe" style={{ fontWeight: "bold" }}>Nocne jazdy: {this.state.nightSkiing} <TiLightbulb tooltip="Nocne jazdy możliwe"/></h5>
-            }
-            {this.state.nightSkiing === false &&
-              <h5 title="Brak nocnych jazd" style={{ fontWeight: "bold" }}>Nocne jazdy: {this.state.nightSkiing} <FaLightbulb tooltip="Brak nocnych jazd"/></h5>
-            }
+            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+              {this.state.nightSkiing === true &&
+                <h5 title="Nocne jazdy możliwe" style={{ fontWeight: "bold" }}>Nocne jazdy: {this.state.nightSkiing} <TiLightbulb tooltip="Nocne jazdy możliwe" /></h5>
+              }
+              {this.state.nightSkiing === false &&
+                <h5 title="Brak nocnych jazd" style={{ fontWeight: "bold" }}>Nocne jazdy: {this.state.nightSkiing} <FaLightbulb tooltip="Brak nocnych jazd" /></h5>
+              }
             </GridColumn>
           </GridRow>
           <GridColumn
@@ -108,7 +108,7 @@ class ResortCard extends Component {
             tablet={4}
             computer={2}
             padded="horizontally"
-            style={{padding: 5, paddingLeft: 25}}
+            style={{ padding: 5, paddingLeft: 25 }}
           >
             <Grid.Row centered={true} textAlign="center">
               <Link
@@ -117,8 +117,8 @@ class ResortCard extends Component {
                   state: { resortDetails: this.props.resortDetails },
                 }}
               >
-                <Button style={{backgroundColor: Colors.primary}} size="small">
-                  <Button.Content visible style={{color: Colors.background}}>Więcej</Button.Content>
+                <Button style={{ backgroundColor: Colors.primary }} size="small">
+                  <Button.Content visible style={{ color: Colors.background }}>Więcej</Button.Content>
                 </Button>
               </Link>
             </Grid.Row>
