@@ -50,7 +50,7 @@ class App extends Component {
       <Router>
         <div style={{backgroundColor: Colors.background}}>
           <nav className="navbar navbar-expand navbar-dark" style={{backgroundColor: Colors.primary}}>
-            <Link to={"/"} className="navbar-brand">
+            <Link to={"/resorts"} className="navbar-brand">
               SkiWithMe
             </Link>
             <div className="navbar-nav mr-auto">
@@ -63,7 +63,7 @@ class App extends Component {
               )}
 
               <li className="nav-item">
-                <Link to={"/resorts"} className="nav-link">
+                <Link id="nav-resort" to={"/resorts"} className="nav-link">
                   Szukaj ośrodka
                 </Link>
               </li>

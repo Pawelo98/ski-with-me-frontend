@@ -48,6 +48,12 @@ class UserService {
     headers = { ...headers, 'Content-Type': 'application/json'};
     return axios.post(USER_URL + 'updateUserData/' + username, JSON.stringify(userDataRequest), { headers: headers });
   }
+
+  addAcquaintance(username, usernameAccept) {
+    var headers = authHeader();
+    headers = { ...headers, 'Content-Type': 'application/json'};
+    return axios.post(USER_URL + 'addAcquaintance/' + username, usernameAccept, { headers: headers });
+  }
 }
 
 export default new UserService();

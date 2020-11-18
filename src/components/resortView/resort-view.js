@@ -14,7 +14,6 @@ import LoadingIndicator from "../../common/LoadingIndicator";
 import { FaMountain } from "react-icons/fa";
 import { TiLightbulb } from "react-icons/ti";
 import { MdNotInterested } from "react-icons/md";
-//import _ from 'lodash';
 import StarRatings from 'react-star-ratings';
 
 class ResortView extends Component {
@@ -23,7 +22,7 @@ class ResortView extends Component {
     this.state = {
       resortDetails: null,
       resortRating: null,
-      resortImage: null,
+      resortImageLink: null,
       ratings: null,
       lastChange: '',
       avgRat1: 0,
@@ -49,11 +48,11 @@ class ResortView extends Component {
         ratings: ratings.data
       })})
 
-    this.getResortImage(this.props.match.params.resortId).then(image => { this.setState({
-        resortImage: "data:image/jpeg;base64," + image.data
+    this.getResortApi(this.props.match.params.resortId).then(resort => { if(resort.data.ski_maps[0] !== undefined) { this.setState({
+        resortImageLink: resort.data.ski_maps[0].media.original.url
         })
-        console.log(this.state.resortImage);
-        console.log(image);
+        console.log(this.state.resortImageLink);
+        }
     })
     
     this.getResortRating(this.props.match.params.resortId).then(resortRating => { this.setState({
@@ -175,8 +174,8 @@ class ResortView extends Component {
     })})
   }
 
-  getResortImage(id) {
-    return resortService.getResortImage(id);
+  getResortApi(id) {
+    return resortService.getResortImageApi(id);
   }
 
   getResortRating(id) {
@@ -339,14 +338,18 @@ class ResortView extends Component {
                         <GridColumn floated="left" textAlign="left" style={{padding: 5}}>
                             <h3 style={{ fontWeight: "bold" }}>Mapa tras: </h3>
                         </GridColumn>
-                        <GridColumn floated="left" textAlign="left" style={{padding: 5}}>
-                            {/* <h4 style={{ fontWeight: "bold" }}>Załadowana mapka</h4> */}
+                        <GridColumn floated="left" textAlign="left" style={{padding: 15}}>
+                            { this.state.resortImageLink === null ? 
+                            (
+                                <h3 style={{ fontWeight: "bold" }}>Brak mapy tras dla tego ośrodka</h3>
+                            ) : (
                             <Image
                                 fluid
                                 bordered
                                 rounded
                                 centered
-                                srcobject={this.state.resortImage}/>
+                                src={this.state.resortImageLink}/>
+                            )}
                         </GridColumn>
                     </GridRow>
                 </GridRow>

@@ -28,11 +28,12 @@ class ReportCard extends Component {
 
   render () {
     return (
-      <Grid columns="equal">
+      <Grid style={{ height: 150 }}>
         <GridRow columns={1} stretched style={{ padding: 5 }}>
           <GridRow columns={1} stretched style={{ padding: 5, paddingLeft: 35 }}>
             <GridColumn textAlign="center" style={{ padding: 3 }}>
-              <h4 style={{ fontWeight: "bold" }}>{this.state.name} brał(a) udział w {this.state.daysNumber} dniowym wyjeździe w ośrodku {this.state.resortName}</h4>
+              <h4 style={{ fontWeight: "bold", width: 430, marginBottom: 3 }}>{this.state.name} brał(a) udział w {this.state.daysNumber} dniowym wyjeździe w ośrodku</h4>
+              <h4 style={{ fontWeight: "bold", width: 430, marginTop: 3 }}>{this.state.resortName}</h4>
             </GridColumn>
             <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>"{this.state.userTripDescription}"</h5>

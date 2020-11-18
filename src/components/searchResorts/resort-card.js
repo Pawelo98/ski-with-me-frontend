@@ -117,7 +117,7 @@ class ResortCard extends Component {
                   state: { resortDetails: this.props.resortDetails },
                 }}
               >
-                <Button style={{ backgroundColor: Colors.primary }} size="small">
+                <Button id={this.state.resortId} style={{ backgroundColor: Colors.primary }} size="small">
                   <Button.Content visible style={{ color: Colors.background }}>Więcej</Button.Content>
                 </Button>
               </Link>

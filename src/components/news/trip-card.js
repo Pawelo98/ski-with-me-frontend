@@ -40,22 +40,22 @@ class TripCard extends Component {
 
   render () {
     return (
-      <Grid columns="equal">
+      <Grid columns="equal" style={{ height: 150 }}>
         <GridRow columns={1} stretched style={{ padding: 5 }}>
           <GridRow columns={1} stretched style={{ padding: 5, paddingLeft: 35 }}>
-            <GridColumn textAlign="center" style={{ padding: 3 }}>
-              <h4 style={{ fontWeight: "bold" }}>{this.state.resortName}</h4>
+            <GridColumn textAlign="center" width={12} style={{ padding: 3 }}>
+              <h4 style={{ fontWeight: "bold", width: 430 }}>{this.state.resortName}</h4>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+            <GridColumn verticalAlign="middle" width={12} style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Data wyjazdu: {this.state.departureDate}</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+            <GridColumn verticalAlign="middle" width={12} style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Godzina wyjazdu: {this.state.departureTime}</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+            <GridColumn verticalAlign="middle" width={12} style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>Data powrotu: {this.state.arrivalDate}</h5>
             </GridColumn>
-            <GridColumn verticalAlign="middle" style={{ padding: 3 }}>
+            <GridColumn verticalAlign="middle" width={12} style={{ padding: 3 }}>
               <h5 style={{ fontWeight: "bold" }}>{this.state.description}</h5>
             </GridColumn>
           </GridRow>

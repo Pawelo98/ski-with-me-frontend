@@ -3,7 +3,9 @@ import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
 import { Grid, Segment, List, Header, Form, Input, Button, Icon } from "semantic-ui-react";
 import LoadingIndicator from "../../common/LoadingIndicator";
+import { notification } from "antd";
 import {Colors} from "../../constants";
+import { FaUser } from 'react-icons/fa';
 
 export default class Acquaintances extends Component {
     constructor(props) {
@@ -11,9 +13,9 @@ export default class Acquaintances extends Component {
     
         this.state = {
             username: AuthService.getCurrentUser().username,
-            acquaintances: null,
+            acquaintances: [],
             acquaintancesToAdd: null,
-            usernameInput: "a",
+            usernameInput: "",
             isLoading: true
           };
       }
@@ -21,8 +23,7 @@ export default class Acquaintances extends Component {
       componentDidMount() {
         this.getAcquaintances(this.state.username).then(acquaintances => { this.setState({
             acquaintances: acquaintances.data.userDTO
-          })
-        console.log(this.state.acquaintances)});
+          })});
 
         this.getAcquaintancesToAdd(this.state.username, this.state.usernameInput);
       }
@@ -38,7 +39,6 @@ export default class Acquaintances extends Component {
           .then((response) => {
             this.setState({ acquaintancesToAdd: response.data.content });
             this.setState({ isLoading: false });
-            console.log(this.state.acquaintancesToAdd);
           })
           .catch((error) => {
             console.log(error);
@@ -51,8 +51,34 @@ export default class Acquaintances extends Component {
 
       onChangeUsername(event) {
         this.setState({
-            username: event.target.value
+            usernameInput: event.target.value
         })
+      }
+
+      handleAddAcquaintance(username) {
+        UserService
+        .addAcquaintance(AuthService.getCurrentUser().username, username)
+        .then((response) => {
+            notification.success({
+                message: "Znajomy został dodany!",
+                description:
+                    "Dodano znajomego o loginie " + username + "!",
+            });
+        })
+        .then((response) => {
+            this.getAcquaintances(this.state.username).then(acquaintances => { this.setState({
+                acquaintances: acquaintances.data.userDTO
+              })});
+
+              this.getAcquaintancesToAdd(this.state.username, this.state.usernameInput);
+        })
+        .catch((error) => {
+            notification.error({
+                message: "Nie udało się dodać znajomego!",
+                description:
+                    "Użytkownik o loginie " + username + " nie został dodany do znajomych!",
+            });
+        });
       }
     
       render() {
@@ -66,29 +92,54 @@ export default class Acquaintances extends Component {
                 <Grid columns="equal" textAlign="center">
                     <Grid.Row stretched columns={2}>
                         <Grid.Column textAlign="center" verticalAlign="middle" >
-                            <Header as="h3">
+                            <Header as="h2">
                                 Lista znajomych
                             </Header>
                         </Grid.Column>
                         <Grid.Column textAlign="center" verticalAlign="middle" >
-                            <Header as="h3">
+                            <Header as="h2">
                                 Szukaj znajomych
                             </Header>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row stretched columns={2}>
-                        <Grid.Column textAlign="center" verticalAlign="middle" >
-                            <Header as="h3">
-                                Lista znajomych
-                            </Header>
+                        <Grid.Column>
+                            <React.Fragment>
+                                <List divided verticalAlign="middle" size="huge">
+                                    {this.state.acquaintances.length === 0 ? (
+                                            <h3>Brak znajomych do wyświetlenia</h3>
+                                        ) : (
+                                        this.state.acquaintances.map((user) => (
+                                            <Segment key={user.username}>
+                                                <Grid textAlign="center">
+                                                    <Grid.Row stretched columns={3}>
+                                                        <Grid.Column style={{ marginRight: 10, marginLeft: 10 }} width="2" floated="left">
+                                                            <FaUser size="30px"/>
+                                                        </Grid.Column>
+                                                        <Grid.Column textAlign="left" verticalAlign="middle">
+                                                            <h3>{user.username}</h3>
+                                                        </Grid.Column>
+                                                        <Grid.Column width="7" style={{ marginLeft: 10 }} floated="right">
+                                                            <h4 style={{ margin: 5 }}>{user.name} {user.surname}</h4>
+                                                            <h4 style={{ margin: 5 }}>{user.email}</h4>
+                                                        </Grid.Column>
+                                                    </Grid.Row>
+                                                </Grid>
+                                            </Segment>
+                                        )))
+                                    }
+                                </List>
+                            </React.Fragment>
                         </Grid.Column>
                         <Grid.Column textAlign="center" verticalAlign="middle" >
                             <Form>
                                 <Form.Field>
                                     <Input
                                         placeholder="Wpisz nazwę użytkownika"
-                                        onChange={this.props.onChangeUsername}
-                                        name="usernameInput"/>
+                                        onChange={(user) => {
+                                            this.onChangeUsername(user);
+                                        }}
+                                        name="usernameInput" />
                                 </Form.Field>
                                 <Form.Field>
                                     <Button
@@ -109,16 +160,32 @@ export default class Acquaintances extends Component {
                             ) : (
                             <React.Fragment>
                                 <List divided verticalAlign="middle" size="huge">
-                                {this.state.acquaintancesToAdd.map((user) => (
+                                {this.state.acquaintancesToAdd.length === 0 ? (
+                                    <h3>Brak użytkowników o loginie z podanym ciągiem znaków</h3>
+                                ) : (
+                                this.state.acquaintancesToAdd.map((user) => (
                                     <Segment key={user.username}>
-                                    {/* <ResortCard
-                                        isAdmin={this.props.isAdmin}
-                                        resortDetails={resort}
-
-                                    ></ResortCard> */}
-                                        <h4>{user.username}</h4>
+                                        <Grid textAlign="center">
+                                            <Grid.Row stretched columns={3}>
+                                                <Grid.Column style={{ marginRight: 10, marginLeft: 10 }} width="2" floated="left">
+                                                    <FaUser size="30px"/>
+                                                </Grid.Column>
+                                                <Grid.Column textAlign="left" verticalAlign="middle">
+                                                    <h3>{user.username}</h3>
+                                                </Grid.Column>
+                                                <Grid.Column floated="right">
+                                                    <Button
+                                                        size="small"
+                                                        onClick={() => this.handleAddAcquaintance(user.username)}
+                                                        style={{ backgroundColor: Colors.primary, color: Colors.background }}>
+                                                        Dodaj do znajomych
+                                                    </Button>
+                                                </Grid.Column>
+                                            </Grid.Row>
+                                        </Grid>
                                     </Segment>
-                                ))}
+                                )))
+                                }
                                 </List>
                             </React.Fragment>
                             )}
