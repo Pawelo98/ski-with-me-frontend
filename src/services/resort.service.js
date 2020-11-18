@@ -13,6 +13,10 @@ class ResortService {
     return axios.get(API_URL + 'resortImage/' + id, { headers: authHeader() }, { responseType: 'blob' });
   }
 
+  getResortImageApi(id) {
+    return axios.get('https://skimap.org/SkiAreas/view/' + id + '.json');
+  }
+
   getResortRatings(id) {
     return axios.get(API_URL + 'rating/' + id, { headers: authHeader() });
   }

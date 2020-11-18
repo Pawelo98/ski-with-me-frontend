@@ -5,10 +5,6 @@ const API_URL = 'http://localhost:8080/api/test/';
 const USER_URL = 'http://localhost:8080/api/user/';
 
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
-  }
-
   getUserBoard() {
     return axios.get(API_URL + 'user', { headers: authHeader() });
   }
@@ -29,6 +25,10 @@ class UserService {
     return axios.get(USER_URL + 'acquaintances/' + username, { headers: authHeader() });
   }
 
+  getAcquaintancesToAddFromUsername(username, usernameInput) {
+    return axios.get(USER_URL + 'acquaintancesToAdd?username=' + username + "&usernameInput=" + usernameInput, { headers: authHeader() });
+  }
+
   getTripsFromUsername(username) {
     return axios.get(USER_URL + 'trips/' + username, { headers: authHeader() });
   }
@@ -47,6 +47,12 @@ class UserService {
     var headers = authHeader();
     headers = { ...headers, 'Content-Type': 'application/json'};
     return axios.post(USER_URL + 'updateUserData/' + username, JSON.stringify(userDataRequest), { headers: headers });
+  }
+
+  addAcquaintance(username, usernameAccept) {
+    var headers = authHeader();
+    headers = { ...headers, 'Content-Type': 'application/json'};
+    return axios.post(USER_URL + 'addAcquaintance/' + username, usernameAccept, { headers: headers });
   }
 }
 
