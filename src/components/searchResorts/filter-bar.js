@@ -18,16 +18,16 @@ const itemsOnPageOptions = [
 ];
 
 const sortingOptions = [
-  { key: "1", value: "DESC_resortName", text: "Niealfabetycznie po nazwie ośrodka" },
-  { key: "2", value: "ASC_resortName", text: "Alfabetycznie po nazwie ośrodka" },
-  { key: "3", value: "DESC_distance", text: "Malejąco po odległości od obecnej pozycji" },
-  { key: "4", value: "ASC_temperature", text: "Rosnąco po temperaturze" },
-  { key: "5", value: "DESC_temperature", text: "Malejąco po temperaturze" },
-  { key: "6", value: "ASC_snowThickness", text: "Rosnąco po grubości pokrywy śnieżnej" },
-  { key: "7", value: "DESC_snowThickness", text: "Malejąco po grubości pokrywy śnieżnej" },
-  { key: "8", value: "DESC_runCount", text: "Malejąco po liczbie otwartych tras" },
-  { key: "9", value: "DESC_clouds", text: "Malejąco po zachmurzeniu" },
-  { key: "10", value: "ASC_clouds", text: "Rosnąco po zachmurzeniu" }
+  { id: 1, key: "1", value: "DESC_resortName", text: "Niealfabetycznie po nazwie ośrodka" },
+  { id: 2, key: "2", value: "ASC_resortName", text: "Alfabetycznie po nazwie ośrodka" },
+  { id: 3, key: "3", value: "DESC_distance", text: "Malejąco po odległości od obecnej pozycji" },
+  { id: 4, key: "4", value: "ASC_temperature", text: "Rosnąco po temperaturze" },
+  { id: 5, key: "5", value: "DESC_temperature", text: "Malejąco po temperaturze" },
+  { id: 6, key: "6", value: "ASC_snowThickness", text: "Rosnąco po grubości pokrywy śnieżnej" },
+  { id: 7, key: "7", value: "DESC_snowThickness", text: "Malejąco po grubości pokrywy śnieżnej" },
+  { id: 8, key: "8", value: "DESC_runCount", text: "Malejąco po liczbie otwartych tras" },
+  { id: 9, key: "9", value: "DESC_clouds", text: "Malejąco po zachmurzeniu" },
+  { id: 10, key: "10", value: "ASC_clouds", text: "Rosnąco po zachmurzeniu" }
 ];
 
 const filteringOptions = [
