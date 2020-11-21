@@ -7,10 +7,12 @@ import AuthService from "./services/auth.service";
 import Login from "./components/logging/login.component";
 import Register from "./components/logging/register.component";
 import Profile from "./components/userProfile/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardAdmin from "./components/board-admin.component";
 import SearchResorts from "./components/searchResorts/search-resorts.component";
+import TripView from "./components/tripView/trip-view";
+import TripForm from "./components/tripView/trip-form";
 import ResortView from "./components/resortView/resort-view";
+import ResortForm from "./components/resortView/resort-form";
+import GradeResort from "./components/resortView/grade-resort";
 import PasswordChange from "./components/userProfile/password.change.component";
 import UserDataChange from "./components/userProfile/user.data.change.component";
 import News from "./components/news/news.component";
@@ -44,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showAdminBoard } = this.state;
+    const { currentUser } = this.state;
 
     return (
       <Router>
@@ -56,7 +58,7 @@ class App extends Component {
             <div className="navbar-nav mr-auto">
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/news"} className="nav-link">
+                  <Link id="nav-news" to={"/news"} className="nav-link">
                     Aktualności
                   </Link>
                 </li>
@@ -68,18 +70,18 @@ class App extends Component {
                 </Link>
               </li>
 
-              {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                  </Link>
-                </li>
-              )}
-
               {currentUser && (
                 <li className="nav-item">
                   <Link to={"/acquaintances/" + this.state.currentUser.username} className="nav-link">
                     Znajomi
+                  </Link>
+                </li>
+              )}
+              
+              {currentUser && (
+                <li className="nav-item">
+                  <Link id="nav-new-trip" to={"/tripForm/"} className="nav-link">
+                    Nowy wyjazd
                   </Link>
                 </li>
               )}
@@ -88,7 +90,7 @@ class App extends Component {
             {currentUser ? (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
+                  <Link id="nav-user" to={"/profile"} className="nav-link">
                     {currentUser.username}
                   </Link>
                 </li>
@@ -124,10 +126,13 @@ class App extends Component {
               <Route exact path="/passwordChange/:username" component={PasswordChange} />
               <Route exact path="/userDataChange/:username" component={UserDataChange} />
               <Route exact path="/acquaintances/:username" component={Acquaintances} />
-              <Route path="/user" component={BoardUser} />
-              <Route path="/admin" component={BoardAdmin} />
               <Route path="/resorts" component={SearchResorts} />
               <Route path="/resortView/:resortId" component={ResortView} />
+              <Route path="/gradeResort/:resortId" component={GradeResort} />
+              <Route path="/tripView/:tripId" component={TripView} />
+              <Route path="/tripForm/:tripId" component={TripForm} />
+              <Route path="/tripForm" component={TripForm} />
+              <Route path="/resortForm/:resortId" component={ResortForm} />
             </Switch>
           </div>
         </div>

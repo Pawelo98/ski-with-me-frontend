@@ -33,6 +33,10 @@ class UserService {
     return axios.get(USER_URL + 'trips/' + username, { headers: authHeader() });
   }
 
+  getParticipants(tripId) {
+    return axios.get(USER_URL + 'getParticipants/' + tripId, { headers: authHeader() });
+  }
+
   changePassword(passwordChangeRequest, username) {
     var headers = authHeader();
     headers = { ...headers, 'Content-Type': 'application/json'};
@@ -53,6 +57,12 @@ class UserService {
     var headers = authHeader();
     headers = { ...headers, 'Content-Type': 'application/json'};
     return axios.post(USER_URL + 'addAcquaintance/' + username, usernameAccept, { headers: headers });
+  }
+
+  deleteAcquaintance(username, usernameAccept) {
+    var headers = authHeader();
+    headers = { ...headers, 'Content-Type': 'application/json'};
+    return axios.post(USER_URL + 'deleteAcquaintance/' + username, usernameAccept, { headers: headers });
   }
 }
 

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
   Grid,
   GridColumn,
   GridRow,
   Segment,
-  Image
+  Image,
+  Button
 } from "semantic-ui-react";
 import { Colors } from "../../constants";
+import AuthService from "../../services/auth.service";
 import resortService from "../../services/resort.service";
 import ratingService from "../../services/rating.service";
 import LoadingIndicator from "../../common/LoadingIndicator";
@@ -19,6 +21,9 @@ import StarRatings from 'react-star-ratings';
 class ResortView extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
+    
     this.state = {
       resortDetails: null,
       resortRating: null,
@@ -51,7 +56,6 @@ class ResortView extends Component {
     this.getResortApi(this.props.match.params.resortId).then(resort => { if(resort.data.ski_maps[0] !== undefined) { this.setState({
         resortImageLink: resort.data.ski_maps[0].media.original.url
         })
-        console.log(this.state.resortImageLink);
         }
     })
     
@@ -186,6 +190,14 @@ class ResortView extends Component {
       return ratingService.getRatings();
   }
 
+  userHasAdminPrivileges() {
+      if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
   render () {
     if(!this.state.resortImage === null || this.state.resortDetails === null || this.state.resortRating === null || this.state.ratings === null || this.state.resortImage === null) {
         return <LoadingIndicator/>
@@ -195,8 +207,27 @@ class ResortView extends Component {
             <Grid.Column mobile={16} tablet={16} computer={14}>
             <Segment padded>
             <Grid columns="equal">
-                <GridRow columns={1} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
-                    <h1 style={{ fontWeight: "bold", color: Colors.primary }}>{this.state.resortDetails.resortName}</h1>
+                <GridRow columns={3} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
+                    <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                    </GridColumn>
+                    <GridColumn textAlign="center" style={{padding: 5, paddingBottom: 15}}>
+                        <h1 style={{ fontWeight: "bold", color: Colors.primary }}>{this.state.resortDetails.resortName}</h1>
+                    </GridColumn>
+                    <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
+                        {(this.userHasAdminPrivileges()) && (
+                            <Link
+                                style={{ padding: 5 }}
+                                to={{
+                                    pathname: `../resortForm/${this.state.resortDetails.resortId}`, 
+                                    state: { resort: this.state.resortDetails }
+                                }}
+                            >
+                                <Button id="settings" style={{ backgroundColor: Colors.primary, color: Colors.background, width: 200 }} size="small">
+                                    <Button.Content visible style={{ color: Colors.background }}>Zmień ustawienia wyjazdu</Button.Content>
+                                </Button>
+                            </Link>
+                        )}
+                    </GridColumn>
                 </GridRow>
                 <GridRow columns={2} stretched style={{padding: 5}}>
                     <GridRow columns={9} stretched style={{padding: 5, paddingLeft: 50}}>
@@ -268,7 +299,7 @@ class ResortView extends Component {
                 </GridRow>
                 <GridRow columns={2} stretched style={{padding: 5, paddingLeft: 50, paddingTop: 0}}>
                     <GridRow columns={6} stretched style={{padding: 5}}>
-                        <GridColumn floated="left" textAlign="left" style={{padding: 5}}>
+                        <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15}}>
                             <h3 style={{ fontWeight: "bold" }}>Oceny: </h3>
                         </GridColumn>
                         <GridColumn floated="left" textAlign="left" style={{padding: 5}}>
@@ -288,8 +319,17 @@ class ResortView extends Component {
                         </GridColumn>
                     </GridRow>
                     <GridRow columns={6} stretched style={{padding: 5, paddingLeft: 30}}>
-                        <GridColumn floated="left" textAlign="left">
-                            <h3 style={{ fontWeight: "bold" }}>&nbsp;</h3>
+                        <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15}}>
+                            <Link
+                                to={{
+                                pathname: `../gradeResort/${this.props.location.state.resortDetails.resortId}`,
+                                state: { resortDetails: this.props.location.state.resortDetails },
+                                }}
+                            >
+                                <Button id={this.state.resortId} style={{ backgroundColor: Colors.primary, color: Colors.background, width: 240 }} size="small">
+                                    <Button.Content visible style={{ color: Colors.background }}>Oceń ośrodek</Button.Content>
+                                </Button>
+                            </Link>
                         </GridColumn>
                         <GridColumn floated="left" textAlign="left">
                             <StarRatings
@@ -338,10 +378,10 @@ class ResortView extends Component {
                         <GridColumn floated="left" textAlign="left" style={{padding: 5}}>
                             <h3 style={{ fontWeight: "bold" }}>Mapa tras: </h3>
                         </GridColumn>
-                        <GridColumn floated="left" textAlign="left" style={{padding: 15}}>
+                        <GridColumn floated="left" textAlign="center" style={{padding: 5}}>
                             { this.state.resortImageLink === null ? 
                             (
-                                <h3 style={{ fontWeight: "bold" }}>Brak mapy tras dla tego ośrodka</h3>
+                                <h4 style={{ fontWeight: "bold" }}>Brak mapy tras dla tego ośrodka</h4>
                             ) : (
                             <Image
                                 fluid

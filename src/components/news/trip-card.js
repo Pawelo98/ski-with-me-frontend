@@ -27,7 +27,10 @@ class TripCard extends Component {
 
     var tripDateArrival = new Date(departureDate);
     tripDateArrival.setDate(tripDateArrival.getDate() + parseInt(daysNumber));
-    var arrivalFormated = tripDateArrival.toString().substring(11, 15) + "-" + tripDateArrival.toString().substring(8, 10) + "-" + tripDateArrival.toString().substring(8, 10);
+    let monthArrival = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(tripDateArrival.toString().substring(4, 7)) / 3 + 1;
+    if(monthArrival < 10)
+      monthArrival = "0" + monthArrival.toString();
+    var arrivalFormated = tripDateArrival.toString().substring(11, 15) + "-" + monthArrival + "-" + tripDateArrival.toString().substring(8, 10);
 
     this.setState({
       resortName: this.props.trip.resortName,
@@ -56,7 +59,7 @@ class TripCard extends Component {
               <h5 style={{ fontWeight: "bold" }}>Data powrotu: {this.state.arrivalDate}</h5>
             </GridColumn>
             <GridColumn verticalAlign="middle" width={12} style={{ padding: 3 }}>
-              <h5 style={{ fontWeight: "bold" }}>{this.state.description}</h5>
+              <h5 style={{ fontWeight: "bold", width: "90%" }}>{this.state.description}</h5>
             </GridColumn>
           </GridRow>
         </GridRow>

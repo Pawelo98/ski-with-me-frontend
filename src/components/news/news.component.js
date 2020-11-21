@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 export default class News extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
 
     this.state = {
       username: AuthService.getCurrentUser().username,
@@ -155,7 +157,7 @@ export default class News extends Component {
                         <React.Fragment>
                             <GridColumn floated="left" stretched width={12} textAlign="center" style={{padding: 3}}>
                                 {this.state.upcomingTrips[0] !== undefined && (
-                                    <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[0].tripId}`, state: { trip: this.state.upcomingTrips[0] } }}>
+                                    <Link id={this.state.upcomingTrips[0].tripId} to={{ pathname: `/tripView/${this.state.upcomingTrips[0].tripId}`, state: { trip: this.state.upcomingTrips[0] } }}>
                                         <Segment key={this.state.upcomingTrips[0].tripId} color="green" inverted tertiary>
                                             <TripCard trip={this.state.upcomingTrips[0]}/>
                                         </Segment>
@@ -169,7 +171,7 @@ export default class News extends Component {
                             </GridColumn>
                             <GridColumn floated="left" stretched width={12} textAlign="center" style={{padding: 3}}>
                                 {this.state.upcomingTrips[1] !== undefined && (
-                                    <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[1].tripId}`, state: { trip: this.state.upcomingTrips[1] } }}>
+                                    <Link id={this.state.upcomingTrips[1].tripId} to={{ pathname: `/tripView/${this.state.upcomingTrips[1].tripId}`, state: { trip: this.state.upcomingTrips[1] } }}>
                                         <Segment key={this.state.upcomingTrips[1].tripId} color="green" inverted tertiary>
                                             <TripCard trip={this.state.upcomingTrips[1]}/>
                                         </Segment>
@@ -183,7 +185,7 @@ export default class News extends Component {
                             </GridColumn>
                             <GridColumn floated="left" stretched width={12} textAlign="center" style={{padding: 3}}>
                                 {this.state.upcomingTrips[2] !== undefined && (
-                                    <Link to={{ pathname: `/tripView/${this.state.upcomingTrips[2].tripId}`, state: { trip: this.state.upcomingTrips[2] } }}>
+                                    <Link id={this.state.upcomingTrips[2].tripId} to={{ pathname: `/tripView/${this.state.upcomingTrips[2].tripId}`, state: { trip: this.state.upcomingTrips[2] } }}>
                                         <Segment key={this.state.upcomingTrips[2].tripId} color="green" inverted tertiary>
                                             <TripCard trip={this.state.upcomingTrips[2]}/>
                                         </Segment>
@@ -240,7 +242,7 @@ export default class News extends Component {
                             {this.state.upcomingAcquaintancesTrips
                             .map((trip) => (
                                 <GridColumn key={trip.tripId} floated="left" stretched width={12} textAlign="center" style={{padding: 3}}>
-                                    <Link to={{ pathname: `/tripView/${trip.tripId}`, state: { trip: trip } }}>
+                                    <Link id={trip.tripId} to={{ pathname: `/tripView/${trip.tripId}`, state: { trip: trip } }}>
                                         <Segment color="green" inverted tertiary>
                                             <TripCard trip={trip}/>
                                         </Segment>

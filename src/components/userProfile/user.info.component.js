@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
-import { Grid, GridRow, GridColumn, Button, Image } from "semantic-ui-react";
+import { Grid, GridRow, GridColumn, Button } from "semantic-ui-react";
 import { FaSnowboarding, FaSkiing } from 'react-icons/fa';
 import { MdNotInterested } from 'react-icons/md';
 import { Colors } from "../../constants";
 import { Link } from "react-router-dom";
 import { notification } from "antd";
 import LoadingIndicator from "../../common/LoadingIndicator";
+import { FaUser } from 'react-icons/fa';
 
 export default class UserInfo extends Component {
     constructor(props) {
       super(props);
+        
+      document.title = "SkiWithMe";
   
       this.state = {
         currentUser: "",
@@ -29,7 +32,6 @@ export default class UserInfo extends Component {
           }), () => {
               var username = this.state.currentUser.username;
               var uppercase = username.toUpperCase();
-              //console.log(this.state.resortImage);
               this.setState(() => ({
                 uppercase: uppercase
               }))
@@ -64,15 +66,9 @@ export default class UserInfo extends Component {
             <Grid columns="equal">
                 <GridRow columns={10} stretched style={{padding: 5}}>
                     <GridRow columns={10} style={{padding: 5, paddingLeft: 50}}>
-                        <GridColumn floated="left" textAlign="left" verticalAlign="middle" style={{padding: 3}}>
-                            <Image
-                                fluid
-                                bordered
-                                rounded
-                                centered
-                                src={this.state.resortImage}
-                                style={{ height: "120px", width: "120px" }}/>
-                        </GridColumn>
+                        <Grid.Column floated="left" textAlign="left" verticalAlign="middle" style={{paddingTop: 7, marginLeft: 20}}>
+                            <FaUser size="100px"/>
+                        </Grid.Column>
                     </GridRow>
                     <GridRow verticalAlign="middle" columns={10} style={{padding: 5, paddingLeft: 50}}>
                         <GridColumn floated="left" textAlign="left" verticalAlign="middle" style={{padding: 3}}>
