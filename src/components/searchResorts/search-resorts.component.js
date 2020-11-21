@@ -8,6 +8,8 @@ import ResortCard from "./resort-card";
 export default class SearchResorts extends Component {
     constructor(props) {
         super(props);
+        
+        document.title = "SkiWithMe";
     
         this.state = {
             isLoading: true,

@@ -13,6 +13,9 @@ const FormItem = Form.Item;
 export default class Register extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
+    
     this.handleRegister = this.handleRegister.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleSkiing = this.toggleSkiing.bind(this);
