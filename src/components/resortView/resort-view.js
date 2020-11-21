@@ -191,11 +191,14 @@ class ResortView extends Component {
   }
 
   userHasAdminPrivileges() {
-      if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")) {
-          return true;
-      } else {
-          return false;
-      }
+    if(AuthService.getCurrentUser() === null) {
+        return false;
+    }
+    if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")) {
+        return true;
+    } else {
+        return false;
+    }
   }
 
   render () {
@@ -320,6 +323,7 @@ class ResortView extends Component {
                     </GridRow>
                     <GridRow columns={6} stretched style={{padding: 5, paddingLeft: 30}}>
                         <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15}}>
+                        {(AuthService.getCurrentUser() !== null) && 
                             <Link
                                 to={{
                                 pathname: `../gradeResort/${this.props.location.state.resortDetails.resortId}`,
@@ -330,6 +334,7 @@ class ResortView extends Component {
                                     <Button.Content visible style={{ color: Colors.background }}>Oceń ośrodek</Button.Content>
                                 </Button>
                             </Link>
+                        }
                         </GridColumn>
                         <GridColumn floated="left" textAlign="left">
                             <StarRatings

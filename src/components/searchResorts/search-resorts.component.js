@@ -182,14 +182,20 @@ export default class SearchResorts extends Component {
                 ) : (
                   <React.Fragment>
                     <List divided verticalAlign="middle" size="huge">
-                      {this.state.listOfResorts.map((resort) => (
+                    {this.state.listOfResorts.length === 0 ? (
+                      <Segment>
+                        <h4 style={{ fontWeight: "bold" }}>Nie znaleziono ośrodków dla podanych parametrów</h4>
+                      </Segment>
+                    ) : (
+                      this.state.listOfResorts.map((resort) => (
                         <Segment key={resort.resortId}>
                           <ResortCard
                             isAdmin={this.props.isAdmin}
                             resortDetails={resort}
                           ></ResortCard>
                         </Segment>
-                      ))}
+                      ))
+                    )}
                     </List>
                   </React.Fragment>
                 )}
