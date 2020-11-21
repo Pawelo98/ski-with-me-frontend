@@ -7,7 +7,8 @@ export const validation = {
     validateSurname,
     validateEmail,
     validatePhoneNumber,
-    validateDescription
+    validateDescription,
+    validateNumberGreater
 };
 
 function validatePhoneNumber (phoneNumber) {
@@ -38,6 +39,20 @@ function validateDescription(description) {
         return {
             validateStatus: "error",
             errorMsg: `Opis jest zbyt długi - może mieć maksymalnie 255 znaków!`
+        };
+    } else {
+        return {
+            validateStatus: "success",
+            errorMsg: null,
+        };
+    }
+}
+
+function validateNumberGreater(number) {
+    if (number < 0) {
+        return {
+            validateStatus: "error",
+            errorMsg: `Wprowadzona wartość nie jest liczbą większą lub równą 0!`
         };
     } else {
         return {

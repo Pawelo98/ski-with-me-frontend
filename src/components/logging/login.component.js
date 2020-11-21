@@ -11,6 +11,9 @@ const FormItem = Form.Item;
 export default class Login extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
+    
     this.handleLogin = this.handleLogin.bind(this);
     this.onChange = this.onChange.bind(this);
 

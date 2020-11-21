@@ -13,6 +13,9 @@ const FormItem = Form.Item;
 export default class UserDataChange extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
+    
     this.handleDataChange = this.handleDataChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleSkiing = this.toggleSkiing.bind(this);
@@ -143,8 +146,6 @@ export default class UserDataChange extends Component {
         skiing: this.state.skiing,
         snowboarding: this.state.snowboarding
     }
-
-    console.log(userDataRequest);
     
     UserService.updateUserData(
       userDataRequest,

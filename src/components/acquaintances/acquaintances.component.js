@@ -10,6 +10,8 @@ import { FaUser } from 'react-icons/fa';
 export default class Acquaintances extends Component {
     constructor(props) {
         super(props);
+        
+        document.title = "SkiWithMe";
     
         this.state = {
             username: AuthService.getCurrentUser().username,
@@ -80,6 +82,32 @@ export default class Acquaintances extends Component {
             });
         });
       }
+
+      handleDeleteAcquaintance(username) {
+        UserService
+        .deleteAcquaintance(AuthService.getCurrentUser().username, username)
+        .then((response) => {
+            notification.success({
+                message: "Znajomy został usunięty!",
+                description:
+                    "Usunięto znajomego o loginie " + username + "!",
+            });
+        })
+        .then((response) => {
+            this.getAcquaintances(this.state.username).then(acquaintances => { this.setState({
+                acquaintances: acquaintances.data.userDTO
+              })});
+
+              this.getAcquaintancesToAdd(this.state.username, this.state.usernameInput);
+        })
+        .catch((error) => {
+            notification.error({
+                message: "Nie udało się usunąć znajomego!",
+                description:
+                    "Użytkownik o loginie " + username + " nie został usunięty ze znajomych!",
+            });
+        });
+      }
     
       render() {
         return (
@@ -117,11 +145,16 @@ export default class Acquaintances extends Component {
                                                             <FaUser size="30px"/>
                                                         </Grid.Column>
                                                         <Grid.Column textAlign="left" verticalAlign="middle">
-                                                            <h3>{user.username}</h3>
-                                                        </Grid.Column>
-                                                        <Grid.Column width="7" style={{ marginLeft: 10 }} floated="right">
-                                                            <h4 style={{ margin: 5 }}>{user.name} {user.surname}</h4>
+                                                            <h3 style={{ margin: 5, marginBottom: 0 }}>{user.username}</h3>
                                                             <h4 style={{ margin: 5 }}>{user.email}</h4>
+                                                        </Grid.Column>
+                                                        <Grid.Column width="5" floated="right" style={{ height: 50 }}>
+                                                            <Button
+                                                                size="small"
+                                                                onClick={() => this.handleDeleteAcquaintance(user.username)}
+                                                                style={{ backgroundColor: '#ff5f57', color: Colors.background }}>
+                                                                Usuń ze znajomych
+                                                            </Button>
                                                         </Grid.Column>
                                                     </Grid.Row>
                                                 </Grid>
@@ -171,9 +204,10 @@ export default class Acquaintances extends Component {
                                                     <FaUser size="30px"/>
                                                 </Grid.Column>
                                                 <Grid.Column textAlign="left" verticalAlign="middle">
-                                                    <h3>{user.username}</h3>
+                                                    <h3 style={{ margin: 5, marginBottom: 0 }}>{user.username}</h3>
+                                                    <h4 style={{ margin: 5 }}>{user.email}</h4>
                                                 </Grid.Column>
-                                                <Grid.Column floated="right">
+                                                <Grid.Column width="5" floated="right" style={{ height: 50 }}>
                                                     <Button
                                                         size="small"
                                                         onClick={() => this.handleAddAcquaintance(user.username)}

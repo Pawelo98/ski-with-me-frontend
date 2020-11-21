@@ -130,7 +130,7 @@ class FilterBar extends Component {
                       fluid
                       animated
                       style={{backgroundColor: Colors.primary}}
-                      onClick={this.props.onSumbit}
+                      onClick={this.props.onSubmit}
                       loading={this.props.isLoading}
                     >
                       <Button.Content visible style={{color: Colors.background}}>Wyszukaj</Button.Content>

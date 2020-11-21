@@ -11,6 +11,8 @@ const FormItem = Form.Item;
 export default class PasswordChange extends Component {
   constructor(props) {
     super(props);
+        
+    document.title = "SkiWithMe";
 
     this.state = {
       currentUser: '',
