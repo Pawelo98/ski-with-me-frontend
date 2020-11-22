@@ -178,6 +178,10 @@ class ResortView extends Component {
     })})
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
   getResortApi(id) {
     return resortService.getResortImageApi(id);
   }
@@ -212,6 +216,9 @@ class ResortView extends Component {
             <Grid columns="equal">
                 <GridRow columns={3} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
                     <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                        <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                            Powrót
+                        </Button>
                     </GridColumn>
                     <GridColumn textAlign="center" style={{padding: 5, paddingBottom: 15}}>
                         <h1 style={{ fontWeight: "bold", color: Colors.primary }}>{this.state.resortDetails.resortName}</h1>
@@ -226,7 +233,7 @@ class ResortView extends Component {
                                 }}
                             >
                                 <Button id="settings" style={{ backgroundColor: Colors.primary, color: Colors.background, width: 200 }} size="small">
-                                    <Button.Content visible style={{ color: Colors.background }}>Zmień ustawienia wyjazdu</Button.Content>
+                                    <Button.Content visible style={{ color: Colors.background }}>Zmień dane ośrodka</Button.Content>
                                 </Button>
                             </Link>
                         )}

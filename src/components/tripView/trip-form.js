@@ -5,7 +5,7 @@ import TripService from "../../services/trip.service";
 import { validation } from "../../common/validation-rules";
 import { Input, Form } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { Grid, Segment, Button, Container } from "semantic-ui-react";
+import { Grid, Segment, Button, Container, GridRow, GridColumn } from "semantic-ui-react";
 import { Colors } from "../../constants";
 import { notification } from "antd";
 import MenuItem from '@material-ui/core/MenuItem';
@@ -195,6 +195,10 @@ export default class TripForm extends Component {
       });
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
   isFormInvalid() {
     if(this.state.duration.validateStatus === "error" || this.state.description.validateStatus === "error" || this.state.chosenResortId === "") {
         return true;
@@ -295,22 +299,40 @@ export default class TripForm extends Component {
                             </FormItem>
                             <FormItem style={{ marginBottom: 6 }}>
                                 {this.state.isEditionForm === true && (
-                                    <Button
-                                        disabled={this.isFormInvalid()}
-                                        size="small"
-                                        onClick={this.handleSubmitEdit}
-                                        style={{ backgroundColor: Colors.primary, color: Colors.background }}>
-                                        Zaktualizuj wyjazd
-                                    </Button>
+                                    <GridRow columns={2} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
+                                        <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                                            <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                                                Powrót
+                                            </Button>
+                                        </GridColumn>
+                                        <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
+                                            <Button
+                                                disabled={this.isFormInvalid()}
+                                                size="small"
+                                                onClick={this.handleSubmitEdit}
+                                                style={{ width: 200, backgroundColor: Colors.primary, color: Colors.background }}>
+                                                Zaktualizuj wyjazd
+                                            </Button>
+                                        </GridColumn>
+                                    </GridRow>
                                 )}
                                 {this.state.isEditionForm === false && (
-                                    <Button
-                                        disabled={this.isFormInvalid()}
-                                        size="small"
-                                        onClick={this.handleSubmitAdd}
-                                        style={{ backgroundColor: Colors.primary, color: Colors.background }}>
-                                        Stwórz wyjazd
-                                    </Button>
+                                <GridRow columns={2} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
+                                    <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                                        <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                                            Powrót
+                                        </Button>
+                                    </GridColumn>
+                                    <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
+                                        <Button
+                                            disabled={this.isFormInvalid()}
+                                            size="small"
+                                            onClick={this.handleSubmitAdd}
+                                            style={{ width: 200, backgroundColor: Colors.primary, color: Colors.background }}>
+                                            Stwórz wyjazd
+                                        </Button>
+                                    </GridColumn>
+                                </GridRow>
                                 )}
                             </FormItem>
                         </Form>
