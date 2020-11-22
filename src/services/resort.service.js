@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/resort/';
+const API_URL = '/api/resort/';
 
 class ResortService {
   getResorts(activePage, size, filtering, sorting, name, latitude, longitude) {

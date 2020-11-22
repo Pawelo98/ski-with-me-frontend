@@ -96,6 +96,10 @@ class TripView extends Component {
       return this.state.isTripActive;
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
   currentUserParticipates() {
     for(let i = 0; i < this.state.participants.length; i++) {
         if(AuthService.getCurrentUser().username === this.state.participants[i].username) {
@@ -179,7 +183,16 @@ class TripView extends Component {
                     <Grid columns="equal">
                         <GridRow columns={3} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
                             <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                                <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                                    Powrót
+                                </Button>
+                            </GridColumn>
+                            <GridColumn textAlign="center" style={{padding: 5, paddingBottom: 15}}>
+                                <h1 style={{ fontWeight: "bold", color: Colors.primary }}>{this.state.trip.resortName}</h1>
+                            </GridColumn>
+                            <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
                                 <Link
+                                    style={{ padding: 5 }}
                                     to={{
                                     pathname: `../resortView/${this.state.resortDetails.resortId}`,
                                     state: { resortDetails: this.state.resortDetails },
@@ -189,11 +202,6 @@ class TripView extends Component {
                                         <Button.Content visible style={{ color: Colors.background }}>Zobacz ośrodek</Button.Content>
                                     </Button>
                                 </Link>
-                            </GridColumn>
-                            <GridColumn textAlign="center" style={{padding: 5, paddingBottom: 15}}>
-                                <h1 style={{ fontWeight: "bold", color: Colors.primary }}>{this.state.trip.resortName}</h1>
-                            </GridColumn>
-                            <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
                                 {(this.currentUserParticipates()) && (
                                     <Link
                                         style={{ padding: 5 }}

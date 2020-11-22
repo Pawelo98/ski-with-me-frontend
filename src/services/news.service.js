@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const NEWS_URL = 'http://localhost:8080/api/news/';
+const NEWS_URL = '/api/news/';
 
 class NewsService {
   getUpcomingTrips(username) {

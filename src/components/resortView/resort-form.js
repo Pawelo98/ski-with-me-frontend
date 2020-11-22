@@ -84,6 +84,10 @@ export default class ResortForm extends Component {
     });
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
   handleEditResort(e) {
     e.preventDefault();
 
@@ -211,13 +215,22 @@ export default class ResortForm extends Component {
                                 </GridRow>
                             </Grid>
                             <FormItem style={{ marginBottom: 6 }}>
-                                <Button
-                                    disabled={this.isFormInvalid()}
-                                    size="small"
-                                    onClick={this.handleEditResort}
-                                    style={{ backgroundColor: Colors.primary, color: Colors.background }}>
-                                    Zaktualizuj dane ośrodka
-                                </Button>
+                                <GridRow columns={2} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
+                                    <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                                        <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                                            Powrót
+                                        </Button>
+                                    </GridColumn>
+                                    <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
+                                        <Button
+                                            disabled={this.isFormInvalid()}
+                                            size="small"
+                                            onClick={this.handleEditResort}
+                                            style={{ width: 200, backgroundColor: Colors.primary, color: Colors.background }}>
+                                            Zaktualizuj dane ośrodka
+                                        </Button>
+                                    </GridColumn>
+                                </GridRow>
                             </FormItem>
                         </Form>
                     </Container>

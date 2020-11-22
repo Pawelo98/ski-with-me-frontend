@@ -43,6 +43,10 @@ export default class GradeResort extends Component {
     return RatingService.getRatings();
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
   submitGrade(e) {
     e.preventDefault();
 
@@ -215,12 +219,21 @@ export default class GradeResort extends Component {
                             </GridRow>
                         </Grid>
                         <FormItem style={{ marginBottom: 1, marginTop: 20 }}>
-                            <Button
-                                size="small"
-                                onClick={this.submitGrade}
-                                style={{ backgroundColor: Colors.primary, color: Colors.background }}>
-                                Oceń ośrodek
-                            </Button>
+                            <GridRow columns={2} textAlign="center" verticalAlign="middle" centered stretched style={{padding: 5}}>
+                                <GridColumn floated="left" textAlign="left" style={{padding: 5, paddingBottom: 15, paddingLeft: 20}}>
+                                    <Button id="goBack" basic style={{ width: 200, backgroundColor: Colors.background, color: "black", fontWeight: "bold", marginBottom: 5 }} size="small" onClick={() => this.goBack()}>
+                                        Powrót
+                                    </Button>
+                                </GridColumn>
+                                <GridColumn floated="right" textAlign="right" style={{padding: 5, paddingBottom: 15, paddingRight: 20}}>
+                                    <Button
+                                        size="small"
+                                        onClick={this.submitGrade}
+                                        style={{ width: 200, backgroundColor: Colors.primary, color: Colors.background }}>
+                                        Oceń ośrodek
+                                    </Button>
+                                </GridColumn>
+                            </GridRow>
                         </FormItem>
                     </Form>
                 </Container>
