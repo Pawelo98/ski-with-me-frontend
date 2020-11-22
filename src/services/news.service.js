@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const NEWS_URL = '/api/news/';
+const NEWS_URL = 'https://ski-with-me.herokuapp.com/api/news/';
 
 class NewsService {
   getUpcomingTrips(username) {
