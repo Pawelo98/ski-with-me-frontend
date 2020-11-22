@@ -1,7 +1,7 @@
 {
   "name": "ski-with-me",
   "version": "0.1.0",
-  "homepage": "http://Pawelo98.github.io/SkiWithMeFrontend",
+  "homepage": "https://pawelo98.github.io/SkiWithMeFrontend",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
