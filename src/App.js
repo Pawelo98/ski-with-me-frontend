@@ -51,6 +51,8 @@ class App extends Component {
     return (
       <Router>
         <div style={{backgroundColor: Colors.background}}>
+        <div className="container mt-3" style={{backgroundColor: Colors.background}}>
+          <Switch>
           <nav className="navbar navbar-expand navbar-dark" style={{backgroundColor: Colors.primary}}>
             <Link to={"/resorts"} className="navbar-brand">
               SkiWithMe
@@ -116,9 +118,6 @@ class App extends Component {
               </div>
             )}
           </nav>
-
-          <div className="container mt-3" style={{backgroundColor: Colors.background}}>
-            <Switch>
               <Route exact path="/news" component={News} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
