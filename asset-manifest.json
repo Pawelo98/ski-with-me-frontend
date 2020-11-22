@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.dcb5457b.chunk.css",
-    "main.js": "/static/js/main.85b5957b.chunk.js",
-    "main.js.map": "/static/js/main.85b5957b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.99c1b243.js",
-    "runtime-main.js.map": "/static/js/runtime-main.99c1b243.js.map",
-    "static/css/2.0cf6b2a5.chunk.css": "/static/css/2.0cf6b2a5.chunk.css",
-    "static/js/2.de7f46cf.chunk.js": "/static/js/2.de7f46cf.chunk.js",
-    "static/js/2.de7f46cf.chunk.js.map": "/static/js/2.de7f46cf.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.47f770eb3ca0c7c758b589c95bdac6f3.js": "/precache-manifest.47f770eb3ca0c7c758b589c95bdac6f3.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.0cf6b2a5.chunk.css.map": "/static/css/2.0cf6b2a5.chunk.css.map",
-    "static/css/main.dcb5457b.chunk.css.map": "/static/css/main.dcb5457b.chunk.css.map",
-    "static/js/2.de7f46cf.chunk.js.LICENSE.txt": "/static/js/2.de7f46cf.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/SkiWithMeFrontend/static/css/main.dcb5457b.chunk.css",
+    "main.js": "/SkiWithMeFrontend/static/js/main.699b2ee7.chunk.js",
+    "main.js.map": "/SkiWithMeFrontend/static/js/main.699b2ee7.chunk.js.map",
+    "runtime-main.js": "/SkiWithMeFrontend/static/js/runtime-main.18ca298c.js",
+    "runtime-main.js.map": "/SkiWithMeFrontend/static/js/runtime-main.18ca298c.js.map",
+    "static/css/2.e882cc8d.chunk.css": "/SkiWithMeFrontend/static/css/2.e882cc8d.chunk.css",
+    "static/js/2.014737f5.chunk.js": "/SkiWithMeFrontend/static/js/2.014737f5.chunk.js",
+    "static/js/2.014737f5.chunk.js.map": "/SkiWithMeFrontend/static/js/2.014737f5.chunk.js.map",
+    "index.html": "/SkiWithMeFrontend/index.html",
+    "precache-manifest.7c5fb35f4791043ba24b21d3c880901d.js": "/SkiWithMeFrontend/precache-manifest.7c5fb35f4791043ba24b21d3c880901d.js",
+    "service-worker.js": "/SkiWithMeFrontend/service-worker.js",
+    "static/css/2.e882cc8d.chunk.css.map": "/SkiWithMeFrontend/static/css/2.e882cc8d.chunk.css.map",
+    "static/css/main.dcb5457b.chunk.css.map": "/SkiWithMeFrontend/static/css/main.dcb5457b.chunk.css.map",
+    "static/js/2.014737f5.chunk.js.LICENSE.txt": "/SkiWithMeFrontend/static/js/2.014737f5.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/SkiWithMeFrontend/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.99c1b243.js",
-    "static/css/2.0cf6b2a5.chunk.css",
-    "static/js/2.de7f46cf.chunk.js",
+    "static/js/runtime-main.18ca298c.js",
+    "static/css/2.e882cc8d.chunk.css",
+    "static/js/2.014737f5.chunk.js",
     "static/css/main.dcb5457b.chunk.css",
-    "static/js/main.85b5957b.chunk.js"
+    "static/js/main.699b2ee7.chunk.js"
   ]
 }
