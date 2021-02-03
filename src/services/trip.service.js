@@ -2,6 +2,7 @@ import axios from 'axios';
 import authHeader from './auth-header';
 
 const API_URL = 'https://ski-with-me.herokuapp.com/api/trip/';
+//const API_URL = 'http://localhost:8080/api/trip/';
 
 class TripService {
     createTrip(tripObject, username) {

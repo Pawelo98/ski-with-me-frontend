@@ -1,6 +1,7 @@
  var webdriver = require("selenium-webdriver"),
  By = webdriver.By,
  Builder = webdriver.Builder;
+ until = webdriver.until;
 
 async function findClosestResort() {
     // konfiguracja drivera
@@ -19,16 +20,17 @@ async function findClosestResort() {
     await driver.sleep(1000);
 
     // wybranie wyszukiwania ośrodków
-    await driver.findElement(By.id("nav-resort")).click();
-    await driver.sleep(1000);
+    let query = await driver.wait(until.elementLocated(By.id("nav-resort")));
+    query.click();
 
     // wybranie odpowiedniego sortowania z listy
-    await driver.findElement(By.name("sorting")).click();
+    query = await driver.wait(until.elementLocated(By.name("sorting")));
+    query.click();
     await driver.findElement(By.id("3")).click();
-    await driver.sleep(5000);
 
     // wybranie najbliższego ośrodka
-    await driver.findElement(By.className("ui small button")).click();
+    query = await driver.wait(until.elementLocated(By.className("ui small button")));
+    query.click();
     await driver.sleep(5000);
 }
 

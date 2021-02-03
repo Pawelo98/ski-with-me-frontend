@@ -400,6 +400,7 @@ class ResortView extends Component {
                                 bordered
                                 rounded
                                 centered
+                                alt="Mapa tras" 
                                 src={this.state.resortImageLink}/>
                             )}
                         </GridColumn>

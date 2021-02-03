@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
+import HelloPage from "./components/logging/hello.page.component";
 import Login from "./components/logging/login.component";
 import Register from "./components/logging/register.component";
 import Profile from "./components/userProfile/profile.component";
@@ -47,34 +48,33 @@ class App extends Component {
 
   render() {
     const { currentUser } = this.state;
+    const size = 18;
 
     return (
       <Router>
         <div style={{backgroundColor: Colors.background}}>
-        <div className="container mt-3" style={{backgroundColor: Colors.background}}>
-          <Switch>
           <nav className="navbar navbar-expand navbar-dark" style={{backgroundColor: Colors.primary}}>
-            <Link to={"/resorts"} className="navbar-brand">
+            <Link to={"/resorts"} className="navbar-brand" style={{ fontSize: 24, fontWeight: "bold"}}>
               SkiWithMe
             </Link>
             <div className="navbar-nav mr-auto">
               {currentUser && (
                 <li className="nav-item">
-                  <Link id="nav-news" to={"/news"} className="nav-link">
+                  <Link id="nav-news" to={"/news"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Aktualności
                   </Link>
                 </li>
               )}
 
               <li className="nav-item">
-                <Link id="nav-resort" to={"/resorts"} className="nav-link">
+                <Link id="nav-resort" to={"/resorts"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                   Szukaj ośrodka
                 </Link>
               </li>
 
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/acquaintances/" + this.state.currentUser.username} className="nav-link">
+                  <Link to={"/acquaintances/" + this.state.currentUser.username} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Znajomi
                   </Link>
                 </li>
@@ -82,7 +82,7 @@ class App extends Component {
               
               {currentUser && (
                 <li className="nav-item">
-                  <Link id="nav-new-trip" to={"/tripForm/"} className="nav-link">
+                  <Link id="nav-new-trip" to={"/tripForm/"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Nowy wyjazd
                   </Link>
                 </li>
@@ -92,12 +92,12 @@ class App extends Component {
             {currentUser ? (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link id="nav-user" to={"/profile"} className="nav-link">
+                  <Link id="nav-user" to={"/profile"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     {currentUser.username}
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
+                  <a href="/login" className="nav-link" onClick={this.logOut} style={{ fontSize: size, fontWeight: "bold"}}>
                     Wyloguj się
                   </a>
                 </li>
@@ -105,19 +105,22 @@ class App extends Component {
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
+                  <Link to={"/login"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Zaloguj się
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
+                  <Link to={"/register"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Zarejestruj się
                   </Link>
                 </li>
               </div>
             )}
           </nav>
+
+          <div className="container mt-3" style={{backgroundColor: Colors.background}}>
+            <Switch>
               <Route exact path="/news" component={News} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
@@ -132,6 +135,7 @@ class App extends Component {
               <Route path="/tripForm/:tripId" component={TripForm} />
               <Route path="/tripForm" component={TripForm} />
               <Route path="/resortForm/:resortId" component={ResortForm} />
+              <Route path="/" component={HelloPage} />
             </Switch>
           </div>
         </div>
