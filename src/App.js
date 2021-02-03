@@ -68,7 +68,7 @@ class App extends Component {
               )}
 
               <li className="nav-item">
-                <Link id="nav-resort" to={"/resorts"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
+                <Link id="nav-resort" to={"/ski-with-me-frontend/resorts"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                   Szukaj ośrodka
                 </Link>
               </li>
@@ -106,7 +106,7 @@ class App extends Component {
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
+                  <Link to={"/ski-with-me-frontend/login"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Zaloguj się
                   </Link>
                 </li>
