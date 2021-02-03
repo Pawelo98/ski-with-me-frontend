@@ -50,8 +50,9 @@ class App extends Component {
     const { currentUser } = this.state;
     const size = 18;
 
+    console.log("This is the process.env", process.env.PUBLIC_URL);
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div style={{backgroundColor: Colors.background}}>
           <nav className="navbar navbar-expand navbar-dark" style={{backgroundColor: Colors.primary}}>
             <Link to={"/resorts"} className="navbar-brand" style={{ fontSize: 24, fontWeight: "bold"}}>
@@ -121,13 +122,13 @@ class App extends Component {
 
           <div className="container mt-3" style={{backgroundColor: Colors.background}}>
             <Switch>
-              <Route exact path="/news" component={News} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/passwordChange/:username" component={PasswordChange} />
-              <Route exact path="/userDataChange/:username" component={UserDataChange} />
-              <Route exact path="/acquaintances/:username" component={Acquaintances} />
+              <Route path="/news" component={News} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/passwordChange/:username" component={PasswordChange} />
+              <Route path="/userDataChange/:username" component={UserDataChange} />
+              <Route path="/acquaintances/:username" component={Acquaintances} />
               <Route path="/resorts" component={SearchResorts} />
               <Route path="/resortView/:resortId" component={ResortView} />
               <Route path="/gradeResort/:resortId" component={GradeResort} />
