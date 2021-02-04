@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf18e8823c61fb1c78bc293167c7878c",
+    "revision": "d3e225375e7cf4b3ec5bf7357390d9b8",
     "url": "/ski-with-me-frontend/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ski-with-me-frontend/static/css/2.41dad36e.chunk.css"
   },
   {
-    "revision": "06d02a2c22c978452735",
+    "revision": "f4087b448bdf9f080e18",
     "url": "/ski-with-me-frontend/static/css/main.dcb5457b.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ski-with-me-frontend/static/js/2.674ee912.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "06d02a2c22c978452735",
-    "url": "/ski-with-me-frontend/static/js/main.e582ba48.chunk.js"
+    "revision": "f4087b448bdf9f080e18",
+    "url": "/ski-with-me-frontend/static/js/main.e671c82c.chunk.js"
   },
   {
     "revision": "07526859d5fc251249aa",
