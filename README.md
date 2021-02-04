@@ -4,6 +4,7 @@ Frontend repository for SkiWithMe application.
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Functionalities](#functionalities)
 * [Setup](#setup)
 
 ## General info
@@ -13,6 +14,15 @@ SkiWithMe is an application that enables users to create common skiing and snowb
 * Java - version 11
 * React.js
 * Spring Boot REST API
+
+## Functionalities
+* Registration + logging
+* Searching for best resort
+* Browsing acquaintances activities
+* Browsing resorts, trips
+* Grading resorts
+* Adding users to acquaintances
+* Changing states of trips
 
 ## Setup
 Clone the repository or download code and unzip it.
