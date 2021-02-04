@@ -179,7 +179,9 @@ class ResortView extends Component {
   }
 
   goBack() {
-      this.props.history.goBack();
+      this.props.history.push({
+        pathname: `../resorts`
+      })
   }
 
   getResortApi(id) {

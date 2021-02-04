@@ -71,7 +71,10 @@ export default class GradeResort extends Component {
               "Udana próba ocenienia ośrodka!",
         });
 
-        this.props.history.goBack();
+        this.props.history.push({
+            pathname: `../resortView/${this.state.resortDetails.resortId}`,
+            state: { resortDetails: this.state.resortDetails }
+          })
     })
     .catch((error) => {
       notification.error({

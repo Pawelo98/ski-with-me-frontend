@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -44,13 +44,26 @@ class App extends Component {
 
   logOut() {
     AuthService.logout();
+
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showAdminBoard: user.roles.includes("ROLE_ADMIN")
+      });
+    } else {
+      this.setState({
+        currentUser: user,
+        showAdminBoard: false
+      });
+    }
   }
 
   render() {
     const { currentUser } = this.state;
     const size = 18;
 
-    console.log("This is the process.env", process.env.PUBLIC_URL);
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <div style={{backgroundColor: Colors.background}}>
@@ -68,7 +81,7 @@ class App extends Component {
               )}
 
               <li className="nav-item">
-                <Link id="nav-resort" to={"/ski-with-me-frontend/resorts"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
+                <Link id="nav-resort" to={"/resorts"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                   Szukaj ośrodka
                 </Link>
               </li>
@@ -98,15 +111,15 @@ class App extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut} style={{ fontSize: size, fontWeight: "bold"}}>
+                  <Link id="nav-user-logout" to={"/login"} onClick={this.logOut} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Wyloguj się
-                  </a>
+                  </Link>
                 </li>
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/ski-with-me-frontend/login"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
+                  <Link to={"/login"} className="nav-link" style={{ fontSize: size, fontWeight: "bold"}}>
                     Zaloguj się
                   </Link>
                 </li>
