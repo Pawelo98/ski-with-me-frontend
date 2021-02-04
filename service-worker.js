@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ski-with-me-frontend/precache-manifest.201ae5153497cb3eb47d79cf28e9e405.js"
+  "/ski-with-me-frontend/precache-manifest.c7712f5baafff53508244ae2c35ed9d9.js"
 );
 
 self.addEventListener('message', (event) => {
