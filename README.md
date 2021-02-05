@@ -27,4 +27,4 @@ SkiWithMe is an application that enables users to create common skiing and snowb
 ## Setup
 Clone the repository or download code and unzip it.
 <br></br>
-Go to Visual Studio Code. File -> Open folder -> Choose projects folder. In console run: npm install -> npm start. 
+Go to Visual Studio Code. File -> Open folder -> Choose projects folder. In console run: npm install -> npm start.
